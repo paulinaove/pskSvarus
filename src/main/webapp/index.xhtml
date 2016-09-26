@@ -5,69 +5,17 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:o="http://omnifaces.org/ui"
 >
-    <h:head>
-        <title>Kurso kūrimas</title>
-    </h:head>
+<h:head>
+    <title>Kurso kūrimas</title>
+</h:head>
 
-    <h:body>
-        <h:form>
+<h:body>
+    <h1>Laboratory classes for the 1st assignment</h1>
+    <dl>
+        <dt><b>Transactions</b></dt>
+        <dd><p>#{firstComp.sayHello()}</p></dd>
 
-            <p>
-                Visi pašnekesio žingsniai sudėti į vieną puslapį, vaikščiojimas per juos
-                atliekamas su AJAX (visi PrimeFaces komponentai pagal nutylėjimą naudoja AJAX).
-                Tokio sprendimo privalumai:
-            </p>
-            <ol>
-                <li>Naršyklės adreso lauke rodomas tik vienas adresas - nėra problemų, jei naudotojas tą adresą įsideda į bookmark'us</li>
-                <li>Akivaizdžiai nerodomas <code>conversation ID</code></li>
-                <li>Naršyklės mygtukas "Back" nevaikšto per pašnekesio puslapius (o grįžtą į puslapį, buvusį prieš pirmą pašnekesio puslapį)</li>
-            </ol>
-
-            <p:outputPanel rendered="#{useCaseController.isCurrentForm('CREATE_COURSE')}">
-                <h1>Kurso kūrimas</h1>
-                <h:panelGrid id="grid1" columns="3">
-                    <p:outputLabel for="courseName" value="Kurso pavadinimas"/>
-                    <p:inputText id="courseName" value="#{useCaseController.course.name}"/>
-                    <p:message for="courseName"/>
-                </h:panelGrid>
-
-                <p:commandButton value="Kurti kursą"
-                                 actionListener="#{useCaseController.createCourse}"
-                                 update="@form"/>
-            </p:outputPanel>
-
-            <p:outputPanel rendered="#{useCaseController.isCurrentForm('CREATE_STUDENT')}">
-                <h1>Studento kūrimas</h1>
-                <h:panelGrid id="grid" columns="3">
-                    <p:outputLabel for="firstName" value="Vardas"/>
-                    <p:inputText id="firstName" value="#{useCaseController.student.firstName}"/>
-                    <p:message for="firstName"/>
-
-                    <p:outputLabel for="lastName" value="Pavardė"/>
-                    <p:inputText id="lastName" value="#{useCaseController.student.lastName}"/>
-                    <p:message for="lastName"/>
-
-                    <p:outputLabel for="regnr" value="Registravimo numeris"/>
-                    <p:inputText id="regnr" value="#{useCaseController.student.registrationNo}"/>
-                    <p:message for="regnr"/>
-                </h:panelGrid>
-
-                <p:commandButton value="Kurti studentą"
-                                 actionListener="#{useCaseController.createStudent}"
-                                 update="@form"/>
-
-            </p:outputPanel>
-
-            <p:outputPanel rendered="#{useCaseController.isCurrentForm('CONFIRMATION')}">
-                <h1>Patvirtinimas</h1>
-                <!-- Tai paskutinis žingsnis - išjungiame AJAX, naudojame JSF navigaciją: -->
-                <p:commandButton value="OK" action="#{useCaseController.ok}" ajax="false"/>
-                <p:commandButton value="Cancel" action="#{useCaseController.cancel}" ajax="false"/>
-            </p:outputPanel>
-
-            <p:messages globalOnly="true"/>
-        </h:form>
-
-    </h:body>
+        <dt><h:link outcome="conversation"><b>Conversation example</b></h:link></dt>
+    </dl>
+</h:body>
 </html>
-

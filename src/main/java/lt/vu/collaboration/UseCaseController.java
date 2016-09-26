@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Stateful
 public class UseCaseController implements Serializable {
 
-    private static final String PAGE_INDEX_REDIRECT = "index?faces-redirect=true";
+    private static final String PAGE_INDEX_REDIRECT = "conversation?faces-redirect=true";
 
     private enum CURRENT_FORM {
         CREATE_COURSE, CREATE_STUDENT, CONFIRMATION
