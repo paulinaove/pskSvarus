@@ -5,9 +5,15 @@ Project is based on *Maven*, thus import project to IntelliJ IDEA by:
 ## Application Server configuration
 
 ### Apache TomEE
+Short version:
 1. Download WebProfile, ZIP from: [http://tomee.apache.org/downloads.html](http://tomee.apache.org/downloads.html)
 2. Unzip
 3. Copy file `JavaEEstarter/system.properties` to `[tomee-install-directory]/conf`
+4. Register "TomEE Server" application server in IntelliJ IDEA:
+    * Press "Fix", choose "exploded war" as artifact
+5. Run the server, project should start successfully.
+
+Long version: [TomEE and IntelliJ IDEA](http://tomee.apache.org/tomee-and-intellij.html)
 
 ### IBM WAS Liberty
 1. Download and unzip: [WAS Liberty](https://developer.ibm.com/wasdev/downloads/#asset/runtimes-wlp-webProfile7)
@@ -31,4 +37,4 @@ Project is based on *Maven*, thus import project to IntelliJ IDEA by:
 ```
 6. Copy file `JavaEEstarter/target/JavaEEstarter-1.0-SNAPSHOT/WEB-INF/lib/h2-1.4.192.jar`
    to directory `wlp/usr/shared/resources/h2`
-7. Start the server again: project should work fine now.
+7. Run the server again: project should work fine now.
