@@ -9,7 +9,7 @@ Project is based on *Maven*, thus import project to IntelliJ IDEA by:
 2. Unzip
 3. Copy file `JavaEEstarter/system.properties` to `[tomee-install-directory]/conf`
 
-### WebSphere Liberty
+### IBM WAS Liberty
 1. Download and unzip: [WAS Liberty](https://developer.ibm.com/wasdev/downloads/#asset/runtimes-wlp-webProfile7)
 2. Run: `wlp/bin/server create`
 3. Register "WebSphere Server" application server in IntelliJ IDEA:
