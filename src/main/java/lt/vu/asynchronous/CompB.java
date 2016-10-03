@@ -18,6 +18,7 @@ public class CompB implements Serializable {
             Thread.sleep(10000); // sleep for 10 seconds
         } catch (InterruptedException e) {
         }
+        System.out.println("CompB: big task completed.");
         return new AsyncResult<>("BIG result from component B :)");
     }
 
