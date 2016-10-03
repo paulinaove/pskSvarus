@@ -21,12 +21,12 @@ public class FirstComp {
     private SecondComp secondComp;
 
     @PostConstruct
-    private void gimiau() {
+    private void postConstruct() {
         System.out.println(this + " born :)");
     }
 
     @PreDestroy
-    private void tuojMirsiu() {
+    private void preDestroy() {
         System.out.println(this + " about to die :(");
     }
 
