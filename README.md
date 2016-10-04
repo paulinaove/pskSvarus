@@ -8,7 +8,7 @@ Project is based on *Maven*, thus import project to IntelliJ IDEA by:
 1. Download WebProfile from: [http://www.payara.fish/all_downloads](http://www.payara.fish/all_downloads)
 2. Unzip
 3. In IntelliJ IDEA: register "GlassFish Server" -> local:
-    * Choose "Server Domain": payaradomain
+    * Choose "Server Domain": **payaradomain**
     * Press "Fix", choose "exploded war"
     * Press "Fix" again to update debugger settings
 4. Run the server, project should start successfully.
