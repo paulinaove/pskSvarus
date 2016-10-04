@@ -22,7 +22,7 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
     <data-source>
-        <name>java:comp/jdbc/StudentsDataSource</name>
+        <name>java:global/StudentsDataSource</name>
         <class-name>org.h2.jdbcx.JdbcDataSource</class-name>
         <url>jdbc:h2:~/h2database/StudentsDB;AUTO_SERVER=TRUE;INIT=RUNSCRIPT FROM 'classpath:h2database/createdb.sql'</url>
         <user>sa</user>

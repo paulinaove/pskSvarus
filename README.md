@@ -4,24 +4,33 @@ Project is based on *Maven*, thus import project to IntelliJ IDEA by:
 
 ## Application Server configuration
 
+### Payara (fork of GlassFish) - the simplest configuration
+1. Download WebProfile from: [http://www.payara.fish/all_downloads](http://www.payara.fish/all_downloads)
+2. Unzip
+3. In IntelliJ IDEA: register "GlassFish Server" -> local:
+    * Choose "Server Domain": payaradomain
+    * Press "Fix", choose "exploded war"
+    * Press "Fix" again to update debugger settings
+4. Run the server, project should start successfully.
+
 ### Apache TomEE
 Short version:
 1. Download WebProfile, ZIP from: [http://tomee.apache.org/downloads.html](http://tomee.apache.org/downloads.html)
 2. Unzip
 3. Copy file `JavaEEstarter/system.properties` to `[tomee-install-directory]/conf`
-4. Register "TomEE Server" application server in IntelliJ IDEA:
+4. In IntelliJ IDEA: register "TomEE Server" -> local:
     * Press "Fix", choose "exploded war" as artifact
 5. Run the server, project should start successfully.
 
 Long version: [TomEE and IntelliJ IDEA](http://tomee.apache.org/tomee-and-intellij.html)
 
-### IBM WAS Liberty
+### IBM WAS Liberty ('Unsynchronized' cache lending doesn't work as of 2016-10)
 1. Download and unzip: [WAS Liberty](https://developer.ibm.com/wasdev/downloads/#asset/runtimes-wlp-webProfile7)
 2. Run: `wlp/bin/server create`
-3. Register "WebSphere Server" application server in IntelliJ IDEA:
+3. In IntelliJ IDEA: register "WebSphere Server" -> local:
     * Press "Fix" to enable JMX
     * Press "Fix" again, choose "exploded war" as artifact
-    * In tab "Deployment", For "Use custom context root" enter: **JavaEEstarter**
+    * In tab "Deployment", for "Use custom context root" enter: **JavaEEstarter**
 4. Run the server for the first time (it will fail - that is OK), then stop the server.
 5. Open this file with text editor: `wlp/usr/servers/defaultServer/server.xml`, 
    add `classloader` and `library` tags:
