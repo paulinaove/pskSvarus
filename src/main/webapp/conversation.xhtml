@@ -58,7 +58,7 @@
             </p:outputPanel>
 
             <p:outputPanel rendered="#{useCaseController.isCurrentForm('CONFIRMATION')}">
-                <h1>Confirmation</h1>
+                <h1>Confirmation: are you sure?</h1>
                 <!-- This is the last step - turn-off AJAX, use HTTP-POST based navigation: -->
                 <p:commandButton value="OK" action="#{useCaseController.ok}" ajax="false"/>
                 <p:commandButton value="Cancel" action="#{useCaseController.cancel}" ajax="false"/>

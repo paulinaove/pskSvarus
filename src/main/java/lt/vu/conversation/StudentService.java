@@ -1,6 +1,6 @@
-package lt.vu.collaboration;
+package lt.vu.conversation;
 
-import lt.vu.entities.Course;
+import lt.vu.entities.Student;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -8,11 +8,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.SynchronizationType;
 
 @Stateless
-public class CourseService {
+public class StudentService {
     @PersistenceContext(synchronization = SynchronizationType.UNSYNCHRONIZED)
     private EntityManager em;
 
-    public void create(Course course) {
-        em.persist(course);
+    public void create(Student student) {
+        em.persist(student);
     }
 }

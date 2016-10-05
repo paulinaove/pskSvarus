@@ -1,8 +1,9 @@
-package lt.vu.collaboration;
+package lt.vu.conversation;
 
 import lombok.Getter;
 import lt.vu.entities.Course;
 import lt.vu.entities.Student;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import javax.ejb.Stateful;
@@ -46,62 +47,50 @@ public class UseCaseController implements Serializable {
         return currentForm == form;
     }
 
+    /**
+     * The first conversation step.
+     */
     public void createCourse() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-            currentForm = CURRENT_FORM.CREATE_COURSE;
-            return;
-        }
-
         conversation.begin();
         courseService.create(course);
-
         currentForm = CURRENT_FORM.CREATE_STUDENT;
     }
 
+    /**
+     * The second conversation step.
+     */
     public void createStudent() {
-        if (conversation.isTransient()) {
-            currentForm = CURRENT_FORM.CREATE_COURSE;
-            return;
-        }
-
         studentService.create(student);
         student.getCourseList().add(course);
         course.getStudentList().add(student);
-
         currentForm = CURRENT_FORM.CONFIRMATION;
     }
 
-    // Tai paskutinis žingsnis - naudojame JSF navigaciją su redirect:
+    /**
+     * The last conversation step.
+     */
     public String ok() {
-        if (conversation.isTransient()) {
-            return PAGE_INDEX_REDIRECT;
-        }
         try {
             em.joinTransaction();
             em.flush();
-            conversation.end();
-            return PAGE_INDEX_REDIRECT;
+            Messages.addGlobalInfo("Success!");
         } catch (OptimisticLockException ole) {
-            // Kažkas kitas buvo greitesnis...
-            em.clear();
-            // Šį pranešimą parodo h:messages arba p:messages komponentas:
-            Messages.addGlobalWarn("Pabandykite iš naujo, nors tai dar neįgyvendinta...");
-            return null;
+            // Other user was faster...
+            Messages.addGlobalWarn("Please try again");
         } catch (PersistenceException pe) {
-            // Kitokios bėdos su DB - dažniausiai tai programuotojo kaltė.
-            em.clear();
-            // Šį pranešimą parodo h:messages arba p:messages komponentas:
-            Messages.addGlobalError("Finita la commedia");
-            return null;
+            // Some problems with DB - most often this is programmer's fault.
+           Messages.addGlobalError("Finita la commedia...");
         }
+        Faces.getFlash().setKeepMessages(true);
+        conversation.end();
+        return PAGE_INDEX_REDIRECT;
     }
 
-    // Tai paskutinis žingsnis - naudojame JSF navigaciją su redirect:
+    /**
+     * The last (alternative) conversation step.
+     */
     public String cancel() {
-        if (!conversation.isTransient()) {
-            conversation.end();
-        }
+        conversation.end();
         return PAGE_INDEX_REDIRECT;
     }
 
