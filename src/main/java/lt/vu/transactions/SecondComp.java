@@ -3,10 +3,11 @@ package lt.vu.transactions;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.transaction.TransactionSynchronizationRegistry;
+import javax.transaction.Transactional;
 
-@Stateless
+@RequestScoped
 public class SecondComp {
     @Resource
     private TransactionSynchronizationRegistry tx;
@@ -23,7 +24,8 @@ public class SecondComp {
 
     //---------------------------------
 
-    //@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+    //@Transactional(Transactional.TxType.REQUIRES_NEW)
+    @Transactional(Transactional.TxType.REQUIRED)
     public String sayHello() {
         return toString() + " Tx: " + tx.getTransactionKey();
     }
