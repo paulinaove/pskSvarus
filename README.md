@@ -24,13 +24,13 @@ Long version: [TomEE and IntelliJ IDEA](http://tomee.apache.org/tomee-and-intell
 4. Run the server, project should start successfully.
 
 ### WildFly (RedHat)
-1. Download ZIP from: [http://wildfly.org/downloads/]
+1. Download ZIP "Java EE7 Full & Web Distribution" from: [http://wildfly.org/downloads/]
 2. Unzip
 3. In IntelliJ IDEA: register "JBoss Server" -> local:
     * Press "Fix", choose "exploded war"
 4. Run the server, project should start successfully.
 
-### IBM WAS Liberty
+### WAS Liberty (IBM)
 1. Download and unzip: [WAS Liberty](https://developer.ibm.com/wasdev/downloads/#asset/runtimes-wlp-webProfile7)
 2. Run: `wlp/bin/server create`
 3. In IntelliJ IDEA: register "WebSphere Server" -> local:
