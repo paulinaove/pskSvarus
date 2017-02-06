@@ -4,7 +4,17 @@ Project is based on *Maven*, thus import project to IntelliJ IDEA by:
 
 ## Application Server configuration
 
-### Payara (fork of GlassFish) - the simplest configuration
+### TomEE (Apache)
+Short version:
+1. Download WebProfile, ZIP from: [http://tomee.apache.org/downloads.html](http://tomee.apache.org/downloads.html)
+2. Unzip
+4. In IntelliJ IDEA: register "TomEE Server" -> local:
+    * Press "Fix", choose "exploded war" as artifact
+5. Run the server, project should start successfully.
+
+Long version: [TomEE and IntelliJ IDEA](http://tomee.apache.org/tomee-and-intellij.html)
+
+### Payara
 1. Download WebProfile from: [http://www.payara.fish/all_downloads](http://www.payara.fish/all_downloads)
 2. Unzip
 3. In IntelliJ IDEA: register "GlassFish Server" -> local:
@@ -13,18 +23,14 @@ Project is based on *Maven*, thus import project to IntelliJ IDEA by:
     * Press "Fix" again to update debugger settings
 4. Run the server, project should start successfully.
 
-### Apache TomEE
-Short version:
-1. Download WebProfile, ZIP from: [http://tomee.apache.org/downloads.html](http://tomee.apache.org/downloads.html)
+### WildFly (RedHat)
+1. Download ZIP from: [http://wildfly.org/downloads/]
 2. Unzip
-3. Copy file `JavaEEstarter/system.properties` to `[tomee-install-directory]/conf`
-4. In IntelliJ IDEA: register "TomEE Server" -> local:
-    * Press "Fix", choose "exploded war" as artifact
-5. Run the server, project should start successfully.
+3. In IntelliJ IDEA: register "JBoss Server" -> local:
+    * Press "Fix", choose "exploded war"
+4. Run the server, project should start successfully.
 
-Long version: [TomEE and IntelliJ IDEA](http://tomee.apache.org/tomee-and-intellij.html)
-
-### IBM WAS Liberty ('Unsynchronized' cache lending doesn't work as of 2016-10)
+### IBM WAS Liberty
 1. Download and unzip: [WAS Liberty](https://developer.ibm.com/wasdev/downloads/#asset/runtimes-wlp-webProfile7)
 2. Run: `wlp/bin/server create`
 3. In IntelliJ IDEA: register "WebSphere Server" -> local:
