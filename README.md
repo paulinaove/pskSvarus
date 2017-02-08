@@ -50,6 +50,6 @@ Long version: [TomEE and IntelliJ IDEA](http://tomee.apache.org/tomee-and-intell
     </library>
 </server>
 ```
-6. Copy file `JavaEEstarter/target/JavaEEstarter-1.0-SNAPSHOT/WEB-INF/lib/h2-1.4.192.jar`
+6. Copy file `JavaEEstarter/target/JavaEEstarter-1.0-SNAPSHOT/WEB-INF/lib/h2-1.4.193.jar`
    to directory `wlp/usr/shared/resources/h2`
 7. Run the server again: project should work fine now.
