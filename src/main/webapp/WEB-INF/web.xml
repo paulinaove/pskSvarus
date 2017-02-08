@@ -21,6 +21,7 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+    <!-- Embedded database (H2) - DO NOT use for real projects!!! -->
     <data-source>
         <name>java:global/StudentsDataSource</name>
         <class-name>org.h2.jdbcx.JdbcDataSource</class-name>
@@ -28,4 +29,14 @@
         <user>sa</user>
         <password>sa</password>
     </data-source>
+    <!-- PostgreSQL: create database "studentsdb", create tables using example in PostgreSQL-StudentsDB.txt -->
+    <!--
+    <data-source>
+        <name>java:global/StudentsDataSource</name>
+        <class-name>org.postgresql.ds.PGSimpleDataSource</class-name>
+        <url>jdbc:postgresql://localhost/studentsdb?user=postgres&amp;password=postgres</url>
+        <user>postgres</user>
+        <password>postgres</password>
+    </data-source>
+    -->
 </web-app>
