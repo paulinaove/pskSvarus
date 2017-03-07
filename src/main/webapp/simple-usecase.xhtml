@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+    <h:head>
+        <title>Request type usecase</title>
+    </h:head>
+
+    <h:body>
+        <h1>Request type usecase example: create new student</h1>
+        <h:form>
+            <p:fieldset legend="All students" toggleable="true" style="width: 50%">
+                <p:dataTable value="#{newStudentUseCaseController.allStudents}" var="student">
+                    <p:column headerText="Student">
+                        <h:outputText value="#{student.firstName} #{student.lastName} #{student.registrationNo}" />
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+
+            <h2>Create new student</h2>
+            <h:panelGrid id="grid" columns="3">
+                <p:outputLabel for="firstName" value="First name"/>
+                <p:inputText id="firstName" value="#{newStudentUseCaseController.student.firstName}"/>
+                <p:message for="firstName"/>
+
+                <p:outputLabel for="lastName" value="Last name"/>
+                <p:inputText id="lastName" value="#{newStudentUseCaseController.student.lastName}"/>
+                <p:message for="lastName"/>
+
+                <p:outputLabel for="regnr" value="Registration No."/>
+                <p:inputText id="regnr" value="#{newStudentUseCaseController.student.registrationNo}"/>
+                <p:message for="regnr"/>
+            </h:panelGrid>
+
+            <p:commandButton value="Create student"
+                             actionListener="#{newStudentUseCaseController.createStudent}"
+                             ajax="false"/>
+
+            <p:messages globalOnly="true"/>
+        </h:form>
+
+    </h:body>
+</html>
+

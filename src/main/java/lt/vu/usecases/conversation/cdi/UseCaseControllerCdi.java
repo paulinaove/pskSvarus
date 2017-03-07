@@ -1,31 +1,36 @@
-package lt.vu.conversation;
+package lt.vu.usecases.conversation.cdi;
 
 import lombok.Getter;
 import lt.vu.entities.Course;
 import lt.vu.entities.Student;
+import lt.vu.usecases.Palaidas;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
+import javax.persistence.PersistenceException;
+import javax.transaction.Transactional;
 import java.io.Serializable;
+import java.util.List;
 
 @Named
 @ConversationScoped
-@Stateful
-public class UseCaseController implements Serializable {
+@Transactional(Transactional.TxType.REQUIRED)
+public class UseCaseControllerCdi implements Serializable {
 
-    private static final String PAGE_INDEX_REDIRECT = "conversation?faces-redirect=true";
+    private static final String PAGE_INDEX_REDIRECT = "conversation-ejb?faces-redirect=true";
 
     private enum CURRENT_FORM {
         CREATE_COURSE, CREATE_STUDENT, CONFIRMATION
     }
 
-    @PersistenceContext(type = PersistenceContextType.EXTENDED, synchronization = SynchronizationType.UNSYNCHRONIZED)
+    @Inject
+    @Palaidas
     private EntityManager em;
 
     @Inject
@@ -33,9 +38,9 @@ public class UseCaseController implements Serializable {
     private Conversation conversation;
 
     @Inject
-    private CourseService courseService;
+    private CoursePalaidasDAO coursePalaidasDAO;
     @Inject
-    private StudentService studentService;
+    private StudentPalaidasDAO studentPalaidasDAO;
 
     @Getter
     private Course course = new Course();
@@ -52,7 +57,7 @@ public class UseCaseController implements Serializable {
      */
     public void createCourse() {
         conversation.begin();
-        courseService.create(course);
+        coursePalaidasDAO.create(course);
         currentForm = CURRENT_FORM.CREATE_STUDENT;
     }
 
@@ -60,7 +65,7 @@ public class UseCaseController implements Serializable {
      * The second conversation step.
      */
     public void createStudent() {
-        studentService.create(student);
+        studentPalaidasDAO.create(student);
         student.getCourseList().add(course);
         course.getStudentList().add(student);
         currentForm = CURRENT_FORM.CONFIRMATION;
@@ -94,4 +99,7 @@ public class UseCaseController implements Serializable {
         return PAGE_INDEX_REDIRECT;
     }
 
+    public List<Student> getAllStudents() {
+        return studentPalaidasDAO.getAllStudents();
+    }
 }

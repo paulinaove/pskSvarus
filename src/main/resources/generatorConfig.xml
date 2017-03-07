@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="StudentsDB-H2" targetRuntime="MyBatis3Simple">
+        <jdbcConnection driverClass="org.h2.Driver"
+                        connectionURL="jdbc:h2:~/h2database/StudentsDB;AUTO_SERVER=TRUE"
+                        userId="sa"
+                        password="sa">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="tmp.mybatis.model" targetProject="MAVEN" />
+
+        <sqlMapGenerator targetPackage="tmp.mybatis.xml" targetProject="MAVEN" />
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="tmp.mybatis.dao" targetProject="MAVEN" />
+
+        <table schema="PUBLIC" tableName="UNIVERSITY">
+            <generatedKey column="ID" identity="true" sqlStatement="JDBC" />
+            <ignoreColumn column="OPT_LOCK_VERSION" />
+        </table>
+        <table schema="PUBLIC" tableName="STUDENT">
+            <generatedKey column="ID" identity="true" sqlStatement="JDBC" />
+            <ignoreColumn column="OPT_LOCK_VERSION" />
+        </table>
+        <table schema="PUBLIC" tableName="COURSE">
+            <generatedKey column="ID" identity="true" sqlStatement="JDBC" />
+            <ignoreColumn column="OPT_LOCK_VERSION" />
+        </table>
+        <table schema="PUBLIC" tableName="STUDENT_COURSE">
+        </table>
+    </context>
+</generatorConfiguration>

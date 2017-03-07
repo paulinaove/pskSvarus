@@ -15,13 +15,26 @@
         <dt><b>Transactions</b></dt>
         <dd><p>#{firstComp.sayHello()}</p></dd>
 
-        <dt><b>Cache propagation</b></dt>
-        <dd><p>#{comp1.sayHello()}</p></dd>
+        <dt><b>Request type use-case example:</b></dt>
+        <dd>
+            <p>
+                <h:link outcome="simple-usecase">Create new student</h:link>
+            </p>
+        </dd>
 
-        <dt><b>Asynchronous calls</b></dt>
+        <dt><b>Conversation type use-case example:</b></dt>
+        <dd>
+            <p>
+                <h:link outcome="conversation-cdi">Example with CDI - neveikia su TomEE, naudokite WildFly</h:link><br/>
+                Papildoma medžiaga: <h:link outcome="conversation-ejb">Example with EJB</h:link>
+            </p>
+        </dd>
+
+        <dt><b>Papildoma medžiaga: Asynchronous calls</b></dt>
         <dd><p>#{compA.sayHello()}</p></dd>
 
-        <dt><h:link outcome="conversation"><b>Conversation example</b></h:link></dt>
+        <dt><b>Papildoma medžiaga: Cache propagation</b></dt>
+        <dd><p>#{comp1.sayHello()}</p></dd>
     </dl>
 </h:body>
 </html>
