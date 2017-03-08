@@ -1,16 +1,14 @@
-package lt.vu.usecases.conversation.cdi;
+package lt.vu.usecases.cdi.dao;
 
 import lt.vu.entities.Course;
-import lt.vu.usecases.Palaidas;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-@RequestScoped
-public class CoursePalaidasDAO {
+@ApplicationScoped
+public class CourseDAO {
     @Inject
-    @Palaidas
     private EntityManager em;
 
     public void create(Course course) {

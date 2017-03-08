@@ -1,32 +1,35 @@
-package lt.vu.usecases.conversation.ejb;
+package lt.vu.usecases.cdi.conversation;
 
 import lombok.Getter;
 import lt.vu.entities.Course;
 import lt.vu.entities.Student;
+import lt.vu.usecases.cdi.dao.CourseDAO;
+import lt.vu.usecases.cdi.dao.StudentDAO;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
-import javax.ejb.Stateful;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
+import javax.persistence.PersistenceException;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
 @Named
 @ConversationScoped
-@Stateful
-public class UseCaseControllerEjb implements Serializable {
+public class ConversationUseCaseControllerCdi implements Serializable {
 
-    private static final String PAGE_INDEX_REDIRECT = "conversation-ejb?faces-redirect=true";
+    private static final String PAGE_INDEX_REDIRECT = "conversation-cdi?faces-redirect=true";
 
     private enum CURRENT_FORM {
         CREATE_COURSE, CREATE_STUDENT, CONFIRMATION
     }
 
-    @PersistenceContext(type = PersistenceContextType.EXTENDED, synchronization = SynchronizationType.UNSYNCHRONIZED)
+    @Inject
     private EntityManager em;
 
     @Inject
@@ -34,9 +37,9 @@ public class UseCaseControllerEjb implements Serializable {
     private Conversation conversation;
 
     @Inject
-    private CourseEjbDAO courseEjbDAO;
+    private CourseDAO courseDAO;
     @Inject
-    private StudentEjbDAO studentEjbDAO;
+    private StudentDAO studentDAO;
 
     @Getter
     private Course course = new Course();
@@ -53,7 +56,6 @@ public class UseCaseControllerEjb implements Serializable {
      */
     public void createCourse() {
         conversation.begin();
-        courseEjbDAO.create(course);
         currentForm = CURRENT_FORM.CREATE_STUDENT;
     }
 
@@ -61,7 +63,6 @@ public class UseCaseControllerEjb implements Serializable {
      * The second conversation step.
      */
     public void createStudent() {
-        studentEjbDAO.create(student);
         student.getCourseList().add(course);
         course.getStudentList().add(student);
         currentForm = CURRENT_FORM.CONFIRMATION;
@@ -70,9 +71,11 @@ public class UseCaseControllerEjb implements Serializable {
     /**
      * The last conversation step.
      */
+    @Transactional(Transactional.TxType.REQUIRED)
     public String ok() {
         try {
-            em.joinTransaction();
+            courseDAO.create(course);
+            studentDAO.create(student);
             em.flush();
             Messages.addGlobalInfo("Success!");
         } catch (OptimisticLockException ole) {
@@ -96,6 +99,6 @@ public class UseCaseControllerEjb implements Serializable {
     }
 
     public List<Student> getAllStudents() {
-        return studentEjbDAO.getAllStudents();
+        return studentDAO.getAllStudents();
     }
 }

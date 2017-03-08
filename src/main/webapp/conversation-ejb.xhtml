@@ -25,7 +25,7 @@
             </ol>
 
             <p:fieldset legend="All students" toggleable="true" style="width: 50%">
-                <p:dataTable value="#{useCaseControllerEjb.allStudents}" var="student">
+                <p:dataTable value="#{conversationUseCaseControllerEjb.allStudents}" var="student">
                     <p:column headerText="Student">
                         <h:outputText value="#{student.firstName} #{student.lastName} #{student.registrationNo}" />
                     </p:column>
@@ -37,46 +37,46 @@
                 </p:dataTable>
             </p:fieldset>
 
-            <p:outputPanel rendered="#{useCaseControllerEjb.isCurrentForm('CREATE_COURSE')}">
+            <p:outputPanel rendered="#{conversationUseCaseControllerEjb.isCurrentForm('CREATE_COURSE')}">
                 <h1>Create new course</h1>
                 <h:panelGrid id="grid1" columns="3">
                     <p:outputLabel for="courseName" value="Course name"/>
-                    <p:inputText id="courseName" value="#{useCaseControllerEjb.course.name}"/>
+                    <p:inputText id="courseName" value="#{conversationUseCaseControllerEjb.course.name}"/>
                     <p:message for="courseName"/>
                 </h:panelGrid>
 
                 <p:commandButton value="Create course"
-                                 actionListener="#{useCaseControllerEjb.createCourse}"
+                                 actionListener="#{conversationUseCaseControllerEjb.createCourse}"
                                  update="@form"/>
             </p:outputPanel>
 
-            <p:outputPanel rendered="#{useCaseControllerEjb.isCurrentForm('CREATE_STUDENT')}">
+            <p:outputPanel rendered="#{conversationUseCaseControllerEjb.isCurrentForm('CREATE_STUDENT')}">
                 <h1>Create new student</h1>
                 <h:panelGrid id="grid" columns="3">
                     <p:outputLabel for="firstName" value="First name"/>
-                    <p:inputText id="firstName" value="#{useCaseControllerEjb.student.firstName}"/>
+                    <p:inputText id="firstName" value="#{conversationUseCaseControllerEjb.student.firstName}"/>
                     <p:message for="firstName"/>
 
                     <p:outputLabel for="lastName" value="Last name"/>
-                    <p:inputText id="lastName" value="#{useCaseControllerEjb.student.lastName}"/>
+                    <p:inputText id="lastName" value="#{conversationUseCaseControllerEjb.student.lastName}"/>
                     <p:message for="lastName"/>
 
                     <p:outputLabel for="regnr" value="Registration No."/>
-                    <p:inputText id="regnr" value="#{useCaseControllerEjb.student.registrationNo}"/>
+                    <p:inputText id="regnr" value="#{conversationUseCaseControllerEjb.student.registrationNo}"/>
                     <p:message for="regnr"/>
                 </h:panelGrid>
 
                 <p:commandButton value="Create student"
-                                 actionListener="#{useCaseControllerEjb.createStudent}"
+                                 actionListener="#{conversationUseCaseControllerEjb.createStudent}"
                                  update="@form"/>
 
             </p:outputPanel>
 
-            <p:outputPanel rendered="#{useCaseControllerEjb.isCurrentForm('CONFIRMATION')}">
+            <p:outputPanel rendered="#{conversationUseCaseControllerEjb.isCurrentForm('CONFIRMATION')}">
                 <h1>Confirmation: are you sure?</h1>
                 <!-- This is the last step - turn-off AJAX, use HTTP-POST based navigation: -->
-                <p:commandButton value="OK" action="#{useCaseControllerEjb.ok}" ajax="false"/>
-                <p:commandButton value="Cancel" action="#{useCaseControllerEjb.cancel}" ajax="false"/>
+                <p:commandButton value="OK" action="#{conversationUseCaseControllerEjb.ok}" ajax="false"/>
+                <p:commandButton value="Cancel" action="#{conversationUseCaseControllerEjb.cancel}" ajax="false"/>
             </p:outputPanel>
 
             <p:messages globalOnly="true"/>

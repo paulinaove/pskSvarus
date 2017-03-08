@@ -1,13 +1,13 @@
-package lt.vu.usecases.simple;
+package lt.vu.usecases.cdi.dao;
 
 import lt.vu.entities.Student;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
 
-@RequestScoped
+@ApplicationScoped
 public class StudentDAO {
     @Inject
     private EntityManager em;

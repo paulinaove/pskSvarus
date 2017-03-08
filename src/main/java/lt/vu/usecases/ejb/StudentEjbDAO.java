@@ -1,17 +1,16 @@
-package lt.vu.usecases.conversation.cdi;
+package lt.vu.usecases.ejb;
 
 import lt.vu.entities.Student;
-import lt.vu.usecases.Palaidas;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.SynchronizationType;
 import java.util.List;
 
-@RequestScoped
-public class StudentPalaidasDAO {
-    @Inject
-    @Palaidas
+@Stateless
+public class StudentEjbDAO {
+    @PersistenceContext(synchronization = SynchronizationType.UNSYNCHRONIZED)
     private EntityManager em;
 
     public void create(Student student) {

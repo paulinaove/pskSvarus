@@ -1,27 +1,24 @@
-package lt.vu.usecases.conversation.cdi;
+package lt.vu.usecases.ejb;
 
 import lombok.Getter;
 import lt.vu.entities.Course;
 import lt.vu.entities.Student;
-import lt.vu.usecases.Palaidas;
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
+import javax.ejb.Stateful;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.persistence.EntityManager;
-import javax.persistence.OptimisticLockException;
-import javax.persistence.PersistenceException;
-import javax.transaction.Transactional;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Named
 @ConversationScoped
-@Transactional(Transactional.TxType.REQUIRED)
-public class UseCaseControllerCdi implements Serializable {
+@Stateful
+public class ConversationUseCaseControllerEjb implements Serializable {
 
     private static final String PAGE_INDEX_REDIRECT = "conversation-ejb?faces-redirect=true";
 
@@ -29,8 +26,7 @@ public class UseCaseControllerCdi implements Serializable {
         CREATE_COURSE, CREATE_STUDENT, CONFIRMATION
     }
 
-    @Inject
-    @Palaidas
+    @PersistenceContext(type = PersistenceContextType.EXTENDED, synchronization = SynchronizationType.UNSYNCHRONIZED)
     private EntityManager em;
 
     @Inject
@@ -38,9 +34,9 @@ public class UseCaseControllerCdi implements Serializable {
     private Conversation conversation;
 
     @Inject
-    private CoursePalaidasDAO coursePalaidasDAO;
+    private CourseEjbDAO courseEjbDAO;
     @Inject
-    private StudentPalaidasDAO studentPalaidasDAO;
+    private StudentEjbDAO studentEjbDAO;
 
     @Getter
     private Course course = new Course();
@@ -57,7 +53,6 @@ public class UseCaseControllerCdi implements Serializable {
      */
     public void createCourse() {
         conversation.begin();
-        coursePalaidasDAO.create(course);
         currentForm = CURRENT_FORM.CREATE_STUDENT;
     }
 
@@ -65,7 +60,6 @@ public class UseCaseControllerCdi implements Serializable {
      * The second conversation step.
      */
     public void createStudent() {
-        studentPalaidasDAO.create(student);
         student.getCourseList().add(course);
         course.getStudentList().add(student);
         currentForm = CURRENT_FORM.CONFIRMATION;
@@ -76,6 +70,8 @@ public class UseCaseControllerCdi implements Serializable {
      */
     public String ok() {
         try {
+            courseEjbDAO.create(course);
+            studentEjbDAO.create(student);
             em.joinTransaction();
             em.flush();
             Messages.addGlobalInfo("Success!");
@@ -100,6 +96,6 @@ public class UseCaseControllerCdi implements Serializable {
     }
 
     public List<Student> getAllStudents() {
-        return studentPalaidasDAO.getAllStudents();
+        return studentEjbDAO.getAllStudents();
     }
 }

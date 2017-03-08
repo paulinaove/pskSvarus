@@ -1,4 +1,4 @@
-package lt.vu.usecases.conversation.ejb;
+package lt.vu.usecases.ejb;
 
 import lt.vu.entities.Course;
 
