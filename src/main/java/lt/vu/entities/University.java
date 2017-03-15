@@ -10,11 +10,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "UNIVERSITY")
@@ -32,7 +32,6 @@ public class University implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
 
@@ -44,6 +43,6 @@ public class University implements Serializable {
     @Column(name = "OPT_LOCK_VERSION")
     private Integer optLockVersion;
 
-    @OneToMany(mappedBy = "universityId")
+    @OneToMany(mappedBy = "university")
     private List<Student> studentList = new ArrayList<>();
 }

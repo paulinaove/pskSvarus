@@ -61,6 +61,6 @@ public class Student implements Serializable {
 
     @JoinColumn(name = "UNIVERSITY_ID", referencedColumnName = "ID")
     @ManyToOne
-    private University universityId;
+    private University university;
 
 }

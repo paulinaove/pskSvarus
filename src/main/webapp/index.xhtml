@@ -4,6 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
 >
 <h:head>
+    <h:outputStylesheet name="css/styles.css" />
     <title>Laboratory classes</title>
 </h:head>
 
@@ -16,7 +17,8 @@
         <dt><b>Request type use-case example:</b></dt>
         <dd>
             <p>
-                <h:link outcome="simple-usecase">Create new student</h:link>
+                <h:link outcome="simple-usecase-jpa">Create new course and student (DAO with JPA)</h:link><br/>
+                <h:link outcome="simple-usecase-mybatis">Create new course and student (DAO with MyBatis)</h:link>
             </p>
         </dd>
 

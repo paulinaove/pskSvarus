@@ -3,25 +3,28 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:o="http://omnifaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 >
     <h:head>
-        <title>Request type usecase</title>
+        <h:outputStylesheet name="css/styles.css" />
+        <title>Request type usecase (DAO with JPA)</title>
     </h:head>
 
     <h:body>
-        <h1>Request type usecase example: create new student</h1>
+        <h1>Request type usecase example (DAO with JPA)</h1>
         <h:form>
             <p:fieldset legend="All students" toggleable="true" style="width: 50%">
-                <p:dataTable value="#{requestUseCaseController.getAllStudents()}" var="student">
+                <p:dataTable value="#{requestUseCaseControllerJPA.getAllStudents()}" var="student">
                     <p:column headerText="Student">
                         <h:outputText value="#{student.firstName} #{student.lastName} #{student.registrationNo}" />
                     </p:column>
-                    <p:column headerText="Course">
+                    <p:column headerText="Courses">
                         <ui:repeat var="course" value="#{student.courseList}">
                             <h:outputText value="#{course.name} " />
                         </ui:repeat>
+                    </p:column>
+                    <p:column headerText="University">
+                        <h:outputText value="#{student.university.title} " />
                     </p:column>
                 </p:dataTable>
             </p:fieldset>
@@ -32,22 +35,22 @@
                     <td>
                         <h:panelGrid columns="3">
                             <p:outputLabel for="firstName" value="First name"/>
-                            <p:inputText id="firstName" value="#{requestUseCaseController.student.firstName}"/>
+                            <p:inputText id="firstName" value="#{requestUseCaseControllerJPA.student.firstName}"/>
                             <p:message for="firstName"/>
 
                             <p:outputLabel for="lastName" value="Last name"/>
-                            <p:inputText id="lastName" value="#{requestUseCaseController.student.lastName}"/>
+                            <p:inputText id="lastName" value="#{requestUseCaseControllerJPA.student.lastName}"/>
                             <p:message for="lastName"/>
 
                             <p:outputLabel for="regnr" value="Registration No."/>
-                            <p:inputText id="regnr" value="#{requestUseCaseController.student.registrationNo}"/>
+                            <p:inputText id="regnr" value="#{requestUseCaseControllerJPA.student.registrationNo}"/>
                             <p:message for="regnr"/>
                         </h:panelGrid>
                     </td>
                     <td>
                         <h:panelGrid columns="3">
                             <p:outputLabel for="courseName" value="Course name"/>
-                            <p:inputText id="courseName" value="#{requestUseCaseController.course.name}"/>
+                            <p:inputText id="courseName" value="#{requestUseCaseControllerJPA.course.name}"/>
                             <p:message for="courseName"/>
                         </h:panelGrid>
                     </td>
@@ -55,7 +58,7 @@
             </table>
 
             <p:commandButton value="Create student and course"
-                             actionListener="#{requestUseCaseController.createCourseStudent()}"
+                             actionListener="#{requestUseCaseControllerJPA.createCourseStudent()}"
                              ajax="false"/>
 
             <p:messages globalOnly="true"/>

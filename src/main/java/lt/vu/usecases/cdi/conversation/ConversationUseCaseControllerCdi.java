@@ -1,6 +1,7 @@
 package lt.vu.usecases.cdi.conversation;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import lt.vu.entities.Course;
 import lt.vu.entities.Student;
 import lt.vu.usecases.cdi.dao.CourseDAO;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Named
 @ConversationScoped
+@Slf4j
 public class ConversationUseCaseControllerCdi implements Serializable {
 
     private static final String PAGE_INDEX_REDIRECT = "conversation-cdi?faces-redirect=true";
@@ -81,9 +83,11 @@ public class ConversationUseCaseControllerCdi implements Serializable {
         } catch (OptimisticLockException ole) {
             // Other user was faster...
             Messages.addGlobalWarn("Please try again");
+            log.warn("Optimistic Lock violated: ", ole);
         } catch (PersistenceException pe) {
             // Some problems with DB - most often this is programmer's fault.
-           Messages.addGlobalError("Finita la commedia...");
+            Messages.addGlobalError("Finita la commedia...");
+            log.error("Error ending conversation: ", pe);
         }
         Faces.getFlash().setKeepMessages(true);
         conversation.end();
