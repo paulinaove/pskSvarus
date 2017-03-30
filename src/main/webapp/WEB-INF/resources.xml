@@ -5,10 +5,10 @@
 
     <!-- H2 Database -->
     <Resource id="StudentsDataSource" type="DataSource">
-        JdbcDriver = org.h2.Driver
-        JdbcUrl = jdbc:h2:~/h2database/StudentsDB;AUTO_SERVER=TRUE;INIT=RUNSCRIPT FROM 'classpath:h2database/createdb.sql'
-        UserName = sa
-        Password = sa
+        JdbcDriver = com.mysql.jdbc.Driver
+        JdbcUrl = jdbc:mysql://localhost:3306/SuniukuViesbutis?zeroDateTimeBehavior=convertToNull
+        UserName = superumP
+        Password = krabas
         InitialSize = 1
         MaxActive = 10
         MaxWaitTime = 10 seconds

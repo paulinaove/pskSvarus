@@ -7,63 +7,65 @@
 >
     <h:head>
         <h:outputStylesheet name="css/styles.css" />
-        <title>Request type usecase (DAO with MyBatis)</title>
+        <title>Naujo darbuotojo registracija</title>
     </h:head>
-
     <h:body>
-        <h1>Request type usecase example (DAO with MyBatis)</h1>
+        <h1>Darbuotojų sąrašas</h1>
         <h:form>
-            <p:fieldset legend="All students" toggleable="true" style="width: 50%">
-                <p:dataTable value="#{requestUseCaseControllerMyBatis.getAllStudents()}" var="student">
-                    <p:column headerText="Student">
-                        <h:outputText value="#{student.firstName} #{student.lastName} #{student.registrationNo}" />
+            <p:fieldset legend="Visi darbuotojai" toggleable="true" style="width: 50%">
+                <p:dataTable value="#{requestUseCaseControllerMyBatis.getAllDarbuotojas()}" var="darb">
+                    <p:column headerText="Darbuotojas">
+                        <h:outputText value="#{darb.ID} #{darb.vardas}" />
                     </p:column>
-                    <p:column headerText="Courses">
-                        <ui:repeat var="course" value="#{student.courses}">
-                            <h:outputText value="#{course.name} " />
-                        </ui:repeat>
+                    <p:column headerText="Suniukai">
+                    <ui:repeat var="suniukas" value="#{darbuotojas.suniukai}">
+                    <h:outputText value="#{suniukas.vardas} " />
+                    </ui:repeat>
                     </p:column>
-                    <p:column headerText="University">
-                        <h:outputText value="#{student.university.title} " />
+                    <p:column headerText="Viesbutis">
+                    <h:outputText value="#{darbuotojas.viesbutis1.pavadinimas} " />
                     </p:column>
                 </p:dataTable>
             </p:fieldset>
 
-            <h2>Create new course and student</h2>
+            <h2>Sukurti naują darbuotoją</h2>
             <table>
                 <tr>
                     <td>
                         <h:panelGrid columns="3">
-                            <p:outputLabel for="firstName" value="First name"/>
-                            <p:inputText id="firstName" value="#{requestUseCaseControllerMyBatis.student.firstName}"/>
-                            <p:message for="firstName"/>
+                            <p:outputLabel for="id" value="ID"/>
+                            <p:inputText id="id" value="#{requestUseCaseControllerMyBatis.darbuotojas.id}"/>
+                            <p:message for="id"/>
 
-                            <p:outputLabel for="lastName" value="Last name"/>
-                            <p:inputText id="lastName" value="#{requestUseCaseControllerMyBatis.student.lastName}"/>
-                            <p:message for="lastName"/>
+                            <p:outputLabel for="vardas" value="Vardas"/>
+                            <p:inputText id="vardas" value="#{requestUseCaseControllerMyBatis.darbuotojas.vardas}"/>
+                            <p:message for="vardas"/>
 
-                            <p:outputLabel for="regnr" value="Registration No."/>
-                            <p:inputText id="regnr" value="#{requestUseCaseControllerMyBatis.student.registrationNo}"/>
-                            <p:message for="regnr"/>
+                            <p:outputLabel for="pavarde" value="Pavardė"/>
+                            <p:inputText id="pavarde" value="#{requestUseCaseControllerMyBatis.darbuotojas.pavarde}"/>
+                            <p:message for="pavarde"/>
+
+                            <p:outputLabel for="pareigos" value="Pareigos"/>
+                            <p:inputText id="pareigos" value="#{requestUseCaseControllerMyBatis.darbuotojas.pareigos}"/>
                         </h:panelGrid>
                     </td>
                     <td>
                         <h:panelGrid columns="3">
-                            <p:outputLabel for="courseName" value="Course name"/>
-                            <p:inputText id="courseName" value="#{requestUseCaseControllerMyBatis.course.name}"/>
-                            <p:message for="courseName"/>
+                            <p:outputLabel for="gyvunoID" value="Gyvūno ID"/>
+                            <p:inputText id="gyvunoID" value="#{requestUseCaseControllerMyBatis.suniukas.gyvunoid}"/>
+                            <p:message for="gyvunoID"/>
                         </h:panelGrid>
                     </td>
                 </tr>
             </table>
 
-            <p:commandButton value="Create student and course"
-                             actionListener="#{requestUseCaseControllerMyBatis.createCourseStudent()}"
-                             ajax="false"/>
+            <p:commandButton value="Sukurti darbuotoją ir gyvūną"
+                actionListener="#{requestUseCaseControllerMyBatis.createDarbuotojasSuniukas()}"
+                ajax="false"/>
 
             <p:messages globalOnly="true"/>
-        </h:form>
 
+        </h:form>
     </h:body>
 </html>
 

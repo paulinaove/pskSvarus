@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>lt.vu.mif</groupId>
-    <artifactId>JavaEEstarter</artifactId>
+    <artifactId>Svarus</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-    <name>Java EE starter</name>
+    <name>Svarus</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -37,6 +37,11 @@
                         <groupId>org.postgresql</groupId>
                         <artifactId>postgresql</artifactId>
                         <version>9.4.1212</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.41</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -123,6 +128,16 @@
             <artifactId>postgresql</artifactId>
             <version>9.4.1212</version>
         </dependency>
+
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.41</version>
+        </dependency>
+
     </dependencies>
+
+
 
 </project>
